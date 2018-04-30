@@ -21,8 +21,7 @@ export class TypeComponent implements OnInit {
 			'xsd:restriction':{
 					'-base':string,
 					'xsd:minLength':{
-						'-value':number
-					},
+						'-value':number	},
 					'xsd:maxLenght':{
 						'-value':number
 					}

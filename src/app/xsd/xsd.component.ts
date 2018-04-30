@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-xsd',
@@ -70,12 +71,25 @@ export class XsdComponent implements OnInit {
   ngOnInit() {
   }
 
-  agregarBase(newOperationName:HTMLInputElement){
+  getCurrentNamespace(newOperationName:HTMLInputElement){
   	this.base=newOperationName.value;
-  	this.baseIn.push(this.base+ "Intype");
-  	this.baseIn.push(this.base+ "Outype");
 
   }
+
+   buildComplexType(formObj:NgForm){
+     this.objElement.push( {
+            "-maxOccurs":formObj.value.max,
+            "-minOccurs":formObj.value.min,
+            "-name":formObj.value.paramName,
+            "-type":formObj.value.type,
+            "xsd:annotation":{
+              "xsd:annotation":{"xsd:documentation":formObj.value},
+            }
+
+          })
+   }
+
+
   
 
 }

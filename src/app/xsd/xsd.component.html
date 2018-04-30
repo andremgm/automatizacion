@@ -5,7 +5,7 @@
 		Inserte el Nombre del Servicio:	<input type="text" #inputServiceName /> 
 		</div>
 		<div class="col-sm-3">
-		<button class="btn btn-info"  (click)="agregarBase(inputServiceName)">Insertar! </button>
+		<button class="btn btn-info"  (click)="getCurrentNamespace(inputServiceName)">Insertar! </button>
 		</div>
 	</div>
 </div>
@@ -13,7 +13,15 @@
 <hr>
 <!-- para sacar el "obj de js" que esta dentro del form, se tiene que usar la directiva
 de ngForm, pero dentro de la referencia local-->
-<form class="form-group form-inline form-horizontal">
+<form class="form-group form-inline form-horizontal" (ngSubmit)="createSimpleTypeList(f)" #f="ngForm">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-2">
+				<button class="btn btn-danger " type="ngSubmit">Insertar!</button>
+			</div>
+		</div>
+	</div>
+	<br>
 	<div class="container">
 		
 	
@@ -32,14 +40,17 @@ de ngForm, pero dentro de la referencia local-->
 			</div>
 			<div class="col-sm-3">
 				Inserte el nombre del parametro:
-			<input type="text"  name="type" ngModel /> 
+			<input type="text"  name="paramName" ngModel /> 
 			</div>
 
-			<div class="col-sm-2">
-				<button class="btn btn-danger ">Insertar!</button>
+			<hr>
+		</div>
+			<div class="row">
+				<div class="col-sm-6"></div>
+				<div class="col-sm-6">
+					<input type="text" name="documentation" class="input-lg">
+				</div>
 			</div>
-			
-		</div>	
 		
 	</div>	
 </form>
