@@ -1,0 +1,74 @@
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-9">
+		Inserte el NameSpace:	<input type="text" #inputNamespace /> 
+		</div>
+		<div class="col-sm-3">
+		<button class="btn btn-info" (click)="getCurrentNamespace(inputNamespace)" >Agregar nameSpace!</button>
+		</div>
+	</div>
+</div>
+
+<hr>
+<!-- para sacar el "obj de js" que esta dentro del form, se tiene que usar la directiva
+de ngForm, pero dentro de la referencia local-->
+<form class="form-group form-inline form-horizontal" (ngSubmit)="createSimpleTypeList(f)" #f="ngForm" >
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-5">
+			Inserte el nombre del tipo:	<input type="text"  name="nameType" ngModel/> 
+			</div>
+			<div class="col-sm-5">
+			Inserte el tipo:	<input type="text"  name="type" ngModel /> 
+			</div>
+		</div>
+
+		<hr>
+		<div class="row">
+			<div class="col-sm-1">
+				<button class="btn btn-sm btn-secondary active" (click)="getNumberOrString(true)">Numero</button>
+			</div>
+
+			<div class="col-sm-1">
+				<button class="btn btn-sm btn-info active" (click)="getNumberOrString(false)">Cadena</button>
+			</div>
+
+			<div class="col-sm-4">
+				Inserte minimo: <input type="number"  name="min" ngModel /> 
+			</div>
+			<div class="col-sm-4">
+				Inserte maximo: <input type="number"  name="max" ngModel /> 
+			</div>
+			<div class="col-sm-2">
+				<button class="btn btn-danger right">Construir Json!</button>
+			</div>
+		</div>	
+			
+	</div>
+</form>
+<hr>
+
+	<div class="container">
+		<div class="row">
+
+			<div class="col-sm-offset-12" >
+				<button class="btn btn-success" (click)='displayCompleteJson()' >Agregar simpleType!</button>
+			</div>
+			
+		</div>
+	</div>
+
+	<hr>
+
+	<div class="container">
+		<div class="row">
+			{{jsonString}}
+		</div>
+	</div>
+
+			
+			
+			
+		
+	
