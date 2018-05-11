@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
+import {objClass} from '../ObjClass';
 
 @Component({
   selector: 'app-wsdl',
@@ -11,9 +12,9 @@ export class WsdlComponent implements OnInit {
 
   ngOnInit() {
   }
+  @Input() operationNames:[string];
+ 
 
-  jsonTest(){
-  	
-  }
+
 
 }

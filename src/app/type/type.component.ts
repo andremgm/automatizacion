@@ -1,5 +1,6 @@
-import { Component, OnInit,Output } from '@angular/core';
+import { Component, OnInit,Output,EventEmitter,ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import {objClass} from '../ObjClass';
 //import * as json2xml from 'json2xml';
 
 @Component({
@@ -11,52 +12,25 @@ export class TypeComponent implements OnInit {
 
 
 	namespace:string='';
-	@Output() jsonString:string='';
+	i:number=0;
+	currentType:string;	
+	@Output() typeList:EventEmitter<string> = new EventEmitter< string>();
 
-
-
-	 objSimpleType:
-		[{
-			'-name':string,
+	@Output() sharedNameSpace:EventEmitter<string> = new EventEmitter< string>();
+	objSimpleType:objClass['objSimpleType']=
+	[{
+			'-name':'default',
 			'xsd:restriction':{
-					'-base':string,
+					'-base':'default',
 					'xsd:minLength':{
-						'-value':number	},
+						'-value':0	},
 					'xsd:maxLenght':{
-						'-value':number
+						'-value':0
 					}
 			}
-		} ]=[ {
-			'-name':null,
-			'xsd:restriction':{
-					'-base':null,
-					'xsd:minLength':{
-						'-value':null
-					},
-					'xsd:maxLenght':{
-						'-value':null
-					}
-			}}
-		];
-
-  schema: { "shema":{
-    "-xmlns:xsd": string,
-    "-targetNamespace": string,
-    "-xmlns:tns": string,
-    "xsd:simpleType":[{
-			'-name':string,
-			'xsd:restriction':{
-					'-base':string,
-					'xsd:minLength':{
-						'-value':number
-					},
-					'xsd:maxLenght':{
-						'-value':number
-					}
-			}
-		} ]
-
-	}};
+		} ];
+	schema: objClass['schemaType'];
+	jsonSchema:string;
 		
 
   constructor() { }
@@ -67,23 +41,27 @@ export class TypeComponent implements OnInit {
 
 	getCurrentNamespace(newNamespace:HTMLInputElement){
 		this.namespace= newNamespace.value;
+		this.sharedNameSpace.emit(this.namespace);
 		
 	}
 
 	createSimpleTypeList(form:NgForm){
 
+
 		this.objSimpleType.push({
-			'-name':form.value.nameType,'xsd:restriction':{
-				'-base':form.value.type,'xsd:minLength':{
-					'-value':form.value.min},
+			'-name':form.value['nameType' + this.i] ,'xsd:restriction':{
+				'-base':form.value['type' + this.i],'xsd:minLength':{
+					'-value':form.value['min' + this.i]},
 					'xsd:maxLenght':{
-						'-value':form.value.max}
+						'-value':form.value['max' + this.i]}
 					}
 				});
-		// this.objTest.push({numero:5,coso:"pollo"});
-		//console.log(JSON.stringify(this.objSimpleType));
-		//console.log('--------------------------------------------');
 
+ 			
+		this.typeList.emit(form.value['nameType' + this.i]);
+
+
+		this.i++;
 
 		
 	}
@@ -96,19 +74,18 @@ export class TypeComponent implements OnInit {
     		"-xmlns:tns":  "http://www.banorte.com/ws/esb/"+this.namespace,
     		"xsd:simpleType":this.objSimpleType
 	}};
-		console.log(JSON.stringify(this.schema));
+		
+		this.jsonSchema = JSON.stringify(this.schema);
 
-		this.jsonString = JSON.stringify(this.schema);
+		
+
+
 	
 		//console.log(cambio.json2xml(this.schema));
 
 
 	}
 
-	getNumberOrString(number:boolean){
 
-
-
-	}
 
 }

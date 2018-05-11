@@ -1,7 +1,9 @@
 <app-header></app-header>
 <hr>
 
+<app-type (typeList)='addNewType($event)' (sharedNameSpace)='addSharedNameSpace($event)'></app-type>
+<app-xsd [currentType]='passToXsd()' [nameSpace]='passToEverything()'></app-xsd>
+<app-wsdl></app-wsdl>
 
-<router-outlet></router-outlet>
 
 

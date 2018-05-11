@@ -9,6 +9,7 @@ import { WsdlComponent } from './wsdl/wsdl.component';
 import { XsdComponent } from './xsd/xsd.component';
 import { TypeComponent } from './type/type.component';
 
+
 const appRoutes:Routes = [
 //each route is a JS object
   
@@ -23,7 +24,8 @@ const appRoutes:Routes = [
     HeaderComponent,
     WsdlComponent,
     XsdComponent,
-    TypeComponent
+    TypeComponent,
+    
   ],
   imports: [
     BrowserModule,
