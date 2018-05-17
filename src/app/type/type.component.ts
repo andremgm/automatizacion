@@ -13,7 +13,9 @@ export class TypeComponent implements OnInit {
 
 	namespace:string='';
 	i:number=0;
-	currentType:string;	
+	currentType:string;
+	namesList:[string]=['--'];
+
 	@Output() typeList:EventEmitter<string> = new EventEmitter< string>();
 
 	@Output() sharedNameSpace:EventEmitter<string> = new EventEmitter< string>();
@@ -29,10 +31,31 @@ export class TypeComponent implements OnInit {
 					}
 			}
 		} ];
+
+	objSimpleTypeDate:objClass['objSimpleTypeDate']=[{
+			'-name':'default',
+			'xsd:restriction':{
+				'-base':'default'
+			}
+		}];
+
+	objSimpleTypeNumber:objClass['objSimpleTypeNumber']=[{
+		'-name':'default',
+			'xsd:restriction':{
+					'-base':'default',
+					'xsd:minInclusive':{
+						'-value':0	},
+					'xsd:maxInclusive':{
+						'-value':0
+					}
+			}
+	}]
+
+       
+
 	schema: objClass['schemaType'];
 	jsonSchema:string;
 		
-
   constructor() { }
 
   ngOnInit() {
@@ -48,16 +71,63 @@ export class TypeComponent implements OnInit {
 	createSimpleTypeList(form:NgForm){
 
 
-		this.objSimpleType.push({
-			'-name':form.value['nameType' + this.i] ,'xsd:restriction':{
-				'-base':form.value['type' + this.i],'xsd:minLength':{
-					'-value':form.value['min' + this.i]},
+			this.namesList.push(form.value['nameType']);
+			if(!form.value['date'+this.i]){
+
+				if(form.value['number'+this.i]){ 
+
+				
+					this.objSimpleTypeNumber.push({
+						'-name': "NumeroDG" +form.value['nameType' + this.i] ,
+						'xsd:restriction':{
+						'-base':'xsd:integer',
+						'xsd:minInclusive':{
+							'-value':form.value['min' + this.i]},
+						'xsd:maxInclusive':{
+							'-value':form.value['max' + this.i]}
+					}
+				});
+
+				
+			}
+			else{
+				if(form.value['min'+this.i]>0){ 
+					this.objSimpleType.push({
+					'-name': "CadenaLG"+form.value['nameType' + this.i]+'O' ,
+					'xsd:restriction':{
+					'-base':'xsd:string',
+					'xsd:minLength':{
+						'-value':form.value['min' + this.i]},
 					'xsd:maxLenght':{
 						'-value':form.value['max' + this.i]}
 					}
 				});
-
- 			
+				}
+				else{
+					this.objSimpleType.push({
+					'-name': "CadenaLG"+form.value['nameType' + this.i] ,
+					'xsd:restriction':{
+					'-base':'xsd:string',
+					'xsd:minLength':{
+						'-value':form.value['min' + this.i]},
+					'xsd:maxLenght':{
+						'-value':form.value['max' + this.i]}
+					}
+				});
+				}
+			}
+		}
+		else{
+			this.objSimpleTypeDate.push({
+				'-name':"FechaHora",
+				'xsd:restriction':{
+					'-base':"xsd:dateTime"
+				}
+			});
+		}
+			
+		
+		
 		this.typeList.emit(form.value['nameType' + this.i]);
 
 
@@ -68,24 +138,18 @@ export class TypeComponent implements OnInit {
 
 	displayCompleteJson(/*cambio:json2xml*/){
 
-		this.schema={ "shema":{
+		this.schema={ "schema":{
 			"-xmlns:xsd":  "http://www.w3.org/2001/XMLSchema",
     		"-targetNamespace": "http://www.banorte.com/ws/esb/"+this.namespace ,
     		"-xmlns:tns":  "http://www.banorte.com/ws/esb/"+this.namespace,
-    		"xsd:simpleType":this.objSimpleType
-	}};
+    		"xsd:simpleType":this.objSimpleType,
+    		'xsd:simpleTypeDate': this.objSimpleTypeDate,
+    		'xsd:simpleTypeNumber':this.objSimpleTypeNumber
+				}
+			};
 		
 		this.jsonSchema = JSON.stringify(this.schema);
 
-		
-
-
-	
 		//console.log(cambio.json2xml(this.schema));
-
-
 	}
-
-
-
 }

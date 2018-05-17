@@ -7,21 +7,23 @@ import { Component,Output } from '@angular/core';
 })
 export class AppComponent {
   
-	xsdString:string='';
+	xsdObject:{min,typeName};
 	currentNameSpace='';
+  currentMessage ='';
+  currentServiceName='';
 
-  addNewType(currentType:string){
+  addNewType(currentType:{min,typeName}){
   	//console.log("esto es una prueba y funciono "+currentType);
 	  	if(currentType){
 
-  		this.xsdString=currentType;
+  		this.xsdObject=currentType;
   	}
 
   }
 
   passToXsd(){
  // 	console.log("entre a passToXsd()");
-  	return this.xsdString;
+  	return this.xsdObject;
   }
 
  passToEverything(){
@@ -35,5 +37,17 @@ export class AppComponent {
 		this.currentNameSpace=currentNameSpace;	
 	}
  }
+
+ addNewMessage(currentMessage:string){
+   console.log("entro a addNewMessage,valor:"+currentMessage);
+   if(currentMessage){
+     return this.currentMessage=currentMessage;
+   }
+ }
+
+ passToWsdl(){
+   return this.currentMessage;
+ }
+  
 
 }

@@ -2,8 +2,8 @@
 <hr>
 
 <app-type (typeList)='addNewType($event)' (sharedNameSpace)='addSharedNameSpace($event)'></app-type>
-<app-xsd [currentType]='passToXsd()' [nameSpace]='passToEverything()'></app-xsd>
-<app-wsdl></app-wsdl>
+<app-xsd [currentType]='passToXsd()' [nameSpace]='passToEverything()'  (messageName)='addNewMessage($event)'></app-xsd>
+<app-wsdl [nameSpace]='passToEverything()'  [currentMessageName]='passToWsdl()'></app-wsdl>
 
 
 

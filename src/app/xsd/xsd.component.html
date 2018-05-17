@@ -9,9 +9,12 @@
 		<div class="col-sm-3">
 			Inserte el Nombre de la operacion:	<input type="text" #inputOpName /> 
 		</div>
-		<div class="col-sm-6">
+		<div class="col-sm-3">
 			<button class="btn btn-info"  (click)="getCurrentOperationName(inputOpName)">Insertar Nombre! </button>
-			<button class="btn btn-danger" (click)="cleanObj()">Limpiar Elementos</button>
+			
+		</div>
+		<div class="col-sm-3">
+			
 			<button class="btn btn-primary" (click)="commitElements()">Agregar Elementos </button>
 		</div>
 		<div class="col-sm-3">
@@ -37,9 +40,22 @@ de ngForm, pero dentro de la referencia local-->
 	<hr>
 
 	<div class="container table-bordered" *ngFor="let xsd of objElement;let i =index">
-		
-
 		<div class="row">
+			
+
+			<div class="col-sm-3">
+				Inserte el nombre del parametro:
+				<input type="text"  (ngModel)="xsd.paramName" name="paramName{{i}}"  /> 
+			</div>
+
+			<div class="col-sm-3">
+				Inserte el tipo:
+				<br>
+					<select type="text"  (ngModel)="xsd.type" name="type{{i}}" >
+						<option *ngFor="let item of typeArray" >{{item}}</option>
+					</select> 
+				</div>
+
 		
 			<div class="col-sm-3">
 				Inserte minimo ocurrencias: 
@@ -50,21 +66,6 @@ de ngForm, pero dentro de la referencia local-->
 				Inserte maximo ocurrencias: 
 				<input type="number"  (ngModel)="xsd.minOccurs" name="max{{i}}"  /> 
 			</div>
-
-				<div class="col-sm-3">
-				Inserte el tipo:
-				<br>
-					<select type="text"  (ngModel)="xsd.type" name="type{{i}}" >
-						<option *ngFor="let item of typeArray" >{{item}}</option>
-					</select> 
-				</div>
-
-			<div class="col-sm-3">
-				Inserte el nombre del parametro:
-				<input type="text"  (ngModel)="xsd.paramName" name="paramName{{i}}"  /> 
-			</div>
-
-			
 		</div>
 		<hr>
 			<div class="row">

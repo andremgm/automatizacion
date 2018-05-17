@@ -1,4 +1,4 @@
-import { Component, OnInit,Input,OnChanges,Output } from '@angular/core';
+import { Component, OnInit,Input,OnChanges,Output,EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {objClass} from '../ObjClass';
 
@@ -15,7 +15,7 @@ export class XsdComponent implements OnInit,OnChanges {
   i:number=0;
   @Input() currentType:string;
   @Input() nameSpace:string;
-  @Output() messageName:EventEmiiter<string> = new EventEmitter<string>();
+  @Output() messageName:EventEmitter<string> = new EventEmitter<string>();
   
 
   objComplexType:objClass["objComplexType"]=[{
@@ -71,10 +71,11 @@ export class XsdComponent implements OnInit,OnChanges {
 
   getCurrentOperationName(newOperationName:HTMLInputElement){
     this.serviceName=newOperationName.value;
+    
     this.messageName.emit(this.serviceName);
-      
+
     this.objReference.push({
-       "-name": this.serviceName,
+       "-name": this.serviceName+'In',
         "-type": this.serviceName + "Type"
     });
 
@@ -86,8 +87,8 @@ export class XsdComponent implements OnInit,OnChanges {
      this.objElement.push( {
             "-maxOccurs":formObj.value['max'+this.i],
             "-minOccurs":formObj.value['min'+this.i],
-            "-name":formObj.value['paramName'+this.i],
-            "-type":formObj.value['type'+this.i],
+            "-name":"Tran_"+formObj.value['paramName'+this.i],
+            "-type":"this:"+formObj.value['type'+this.i],
             "xsd:annotation":{
               "xsd:annotation":{
                 "xsd:documentation":formObj.value['documentation'+this.i]
@@ -103,7 +104,7 @@ export class XsdComponent implements OnInit,OnChanges {
 
     if(this.objComplexType){ 
 
-       this.schema=   { 'shema':{ "-xmlns:xsd":"http://www.w3.org/2001/XMLSchema",
+       this.schema=   { 'schema':{ "-xmlns:xsd":"http://www.w3.org/2001/XMLSchema",
        "-targetNamespace": "http://www.banorte.com/ws/esb/"+this.nameSpace,
        "-xmlns:tns": "http://www.banorte.com/ws/esb/"+this.nameSpace,
        "xsd:include":{"-schemeLocation":"--Liga Pendiente--"},
@@ -118,11 +119,19 @@ export class XsdComponent implements OnInit,OnChanges {
       //this.jsonSchema = JSON.stringify(this.objElement);
     }
   }
-  cleanObj(){
+  
+  commitElements(){
+        if(this.objElement){ 
 
-   
-      
-    this.objElement= [{
+            this.objComplexType.push({  
+              "-name":this.serviceName+'InType',
+              "xsd:sequence":{
+              "xsd:element":this.objElement
+           }
+      })
+  }
+
+ this.objElement= [{
             "-maxOccurs":0,
             "-minOccurs":0,
             "-name":"default",
@@ -133,19 +142,6 @@ export class XsdComponent implements OnInit,OnChanges {
 
           }];
 
- 
-  }
 
-
-  commitElements(){
-        if(this.objElement){ 
-
-            this.objComplexType.push({  
-              "-name":this.serviceName+'Type',
-              "xsd:sequence":{
-              "xsd:element":this.objElement
-           }
-      })
-  }
   }
 }

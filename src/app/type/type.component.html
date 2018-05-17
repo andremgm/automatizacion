@@ -25,26 +25,31 @@ de ngForm, pero dentro de la referencia local-->
 		</div>
 	</div>
 	<hr>
-
-	<div class="container table-bordered " *ngFor="let type of objSimpleType;let i =index">
+	
+	<div class="container table-bordered " *ngFor="let type of namesList;let i =index">
 	
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-sm-3 col-md-3 col-lg-4">
 				Inserte el nombre del tipo:	
+				<br>
 				<input type="text" (ngModel)="type.name" name="nameType{{i}}" /> 
 			</div>
-			<div class="col-sm-3">
-				Inserte el tipo:	
-				<input type="text"   (ngModel)="type.type" name="type{{i}}"/> 
-			</div>
-	
-			<div class="col-sm-3">
+		
+			<div class="col-sm-2 col-md-3 col-lg-4">
 				Inserte minimo:
+				<br>
 				<input type="number"  (ngModel)="type.min" name="min{{i}}"/>  
 			</div>
-			<div class="col-sm-3">
+			<div class="col-sm-2 col-md-2 col-lg-3">
 				Inserte maximo:
+				<br>
 				<input type="number"  (ngModel)="type.max" name="max{{i}}"/>  
+			</div>
+			<div class="col-sm-1 col-md-1 col-lg-1">
+				<div class="col-sm-6">
+					Numero: <input type="checkbox" (ngModel)='type.number'	name="number{{i}}">
+					Fecha: <input type="checkbox" (ngModel)='type.date'	name="date{{i}}">
+				</div>
 			</div>
 
 		</div>	
