@@ -59,8 +59,8 @@ export class WsdlComponent implements OnInit {
 
 
     objPart:objClass['objPart']=
-  				[{
-                    'element':"default",
+  				      [{
+                    '-element':"default",
                     '-name':"default"
                 }];
 
@@ -68,7 +68,7 @@ export class WsdlComponent implements OnInit {
   			[{
                 '-name':'excepcionMsg',
                 'wsdl:part':[{
-                    'element':"tns:Excepcion",
+                    '-element':"tns:Excepcion",
                     '-name':"excepcion"
                 }],
             }];
@@ -197,13 +197,13 @@ ngOnChanges() {
 	buildMessage(currentMessageName:string){
 		this.objPart.push({
 			'-name':'request' ,
-			'element':'tns:'+currentMessageName+'Request'
+			'-element':'tns:'+currentMessageName+'Request'
 		
 
 		},
 
 		{
-			'element':'mf:HeaderReq',
+			'-element':'mf:HeaderReq',
 			'-name':'requestHeader'
 
 		});
@@ -218,13 +218,13 @@ ngOnChanges() {
 //-----------------------------------------------------------------------------------------------------------------------
     this.objPart.push({
       '-name':'response' ,
-      'element':'tns:'+currentMessageName+'Response'
+      '-element':'tns:'+currentMessageName+'Response'
     
 
     },
 
     {
-      'element':'mf:HeaderRes',
+      '-element':'mf:HeaderRes',
       '-name':'responseHeader'
 
     });
@@ -234,6 +234,8 @@ ngOnChanges() {
       'wsdl:part':this.objPart
     
     })
+
+    this.cleanObjPart();
 
 //-----------------------------------------------------------------------------------------------------------------------
 		this.objPortType.push({
@@ -333,7 +335,7 @@ ngOnChanges() {
         '-xmlns:tns':"http://www.banorte.com/ws/esb/"+this.nameSpace,
         '-xmlns:tnsEx':"http://www.banorte.com/ws/esb/common/ExcepcionGeneral" ,
         '-xmlns:xsd':"http://www.w3.org/2001/XMLSchema",
-        'targetNamespace':"http://www.banorte.com/ws/esb/CancelacionOperacionesPayworks",
+        '-targetNamespace':"http://www.banorte.com/ws/esb/"+this.nameSpace,
         "wsdl:documentation": {
         "wsdl:appinfo": {
         "-source": "WMQI_APPINFO",
@@ -351,9 +353,9 @@ ngOnChanges() {
         'wsdl:types':{
             'xsd:schema':{
                 '-targetNamespace':'http://www.banorte.com/ws/esb/'+this.nameSpace,
-                'xsd:include':{'schemaLocation':this.nameSpace+"V1.0.xsd"},
+                'xsd:include':{'-schemaLocation':this.nameSpace+"V1.0.xsd"},
                 'xsd:import':this.objImport,
-                
+              },
             },
             'wsdl:message':this.objMessages,
             'wsdl:portType':this.objPortFather,
@@ -370,16 +372,11 @@ ngOnChanges() {
 
 
 
-        }
+        };
 
-    };
-
-		this.jsonSchema=JSON.stringify(this.definitions);    
-
+        this.jsonSchema=JSON.stringify(this.definitions);    
 
     }
-		
-    
 
 
 	cleanObjPart(){
@@ -387,14 +384,15 @@ ngOnChanges() {
 
 			this.objPart=  
 				[{
-                    'element':"default",
-                    '-name':"default"
-                }]; 
+           '-element':"default",
+           '-name':"default"
+        }]; 
 
 	}
+}
 
 	
-}
+
 
 
 

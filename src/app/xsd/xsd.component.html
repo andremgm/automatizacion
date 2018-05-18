@@ -7,10 +7,10 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-3">
-			Inserte el Nombre de la operacion:	<input type="text" #inputOpName /> 
+			Inserte el Nombre de la operacion:	<input type="text" #inputOpName (change)="inputOperationNameEmpty(inputOpName)" /> 
 		</div>
 		<div class="col-sm-3">
-			<button class="btn btn-info"  (click)="getCurrentOperationName(inputOpName)">Insertar Nombre! </button>
+			<button class="btn btn-info"  (click)="getCurrentOperationName(inputOpName)" [disabled]="isDisabeled"  >Insertar Nombre! </button>
 			
 		</div>
 		<div class="col-sm-3">

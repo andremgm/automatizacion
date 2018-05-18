@@ -1,11 +1,10 @@
 <div class="container">
 	<div class="row">
 			<div class="col-sm-9">
-					Inserte el NameSpace:	<input type="text" #inputNamespace /> 
+					Inserte el NameSpace:	<input type="text" #inputNamespace  (change)="inputNameSpaceEmpty(inputNamespace)"/> 
 			</div>
-
 			<div class="col-sm-3">
-				<button class="btn btn-info" (click)="getCurrentNamespace(inputNamespace)" >Agregar nameSpace!</button>
+				<button class="btn btn-info" (click)="getCurrentNamespace(inputNamespace)" [disabled]='isDisabeled' >Insertar nameSpace!</button>
 			
 		</div>
 	</div>
@@ -26,7 +25,7 @@ de ngForm, pero dentro de la referencia local-->
 	</div>
 	<hr>
 	
-	<div class="container table-bordered " *ngFor="let type of namesList;let i =index">
+	<div  class="container table-bordered " *ngFor="let type of namesList;let i =index">
 	
 		<div class="row">
 			<div class="col-sm-3 col-md-3 col-lg-4">

@@ -13,6 +13,7 @@ export class XsdComponent implements OnInit,OnChanges {
   typeArray:string[]=['--'];
   jsonSchema:string='';
   i:number=0;
+  isDisabeled:boolean=true;
   @Input() currentType:string;
   @Input() nameSpace:string;
   @Output() messageName:EventEmitter<string> = new EventEmitter<string>();
@@ -83,21 +84,37 @@ export class XsdComponent implements OnInit,OnChanges {
 
   }
 
+  inputOperationNameEmpty(operationName:HTMLInputElement){
+
+      if((operationName.value===null)||(operationName.value=='')){
+      this.isDisabeled=true;
+
+    }else{
+      this.isDisabeled=false;
+    }
+
+
+
+  }
+
    buildComplexType(formObj:NgForm){
-     this.objElement.push( {
-            "-maxOccurs":formObj.value['max'+this.i],
-            "-minOccurs":formObj.value['min'+this.i],
-            "-name":"Tran_"+formObj.value['paramName'+this.i],
-            "-type":"this:"+formObj.value['type'+this.i],
-            "xsd:annotation":{
+
+     if(!formObj.untouched){ 
+       this.objElement.push( {
+              "-maxOccurs":formObj.value['max'+this.i],
+              "-minOccurs":formObj.value['min'+this.i],
+              "-name":"Tran_"+formObj.value['paramName'+this.i],
+              "-type":"this:"+formObj.value['type'+this.i],
               "xsd:annotation":{
-                "xsd:documentation":formObj.value['documentation'+this.i]
+                "xsd:annotation":{
+                  "xsd:documentation":formObj.value['documentation'+this.i]
+                },
               },
-            },
 
           })
       this.i++;
    }
+ }
 
    displayCompleteJson(){
 

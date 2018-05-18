@@ -1,4 +1,4 @@
-import { Component, OnInit,Output,EventEmitter,ElementRef } from '@angular/core';
+import { Component, OnInit,Output,EventEmitter,ElementRef,OnChanges } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {objClass} from '../ObjClass';
 //import * as json2xml from 'json2xml';
@@ -15,7 +15,8 @@ export class TypeComponent implements OnInit {
 	i:number=0;
 	currentType:string;
 	namesList:[string]=['--'];
-
+	isDisabeled:boolean=true;
+	hasValue:string;
 	@Output() typeList:EventEmitter<string> = new EventEmitter< string>();
 
 	@Output() sharedNameSpace:EventEmitter<string> = new EventEmitter< string>();
@@ -59,7 +60,22 @@ export class TypeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
+  inputNameSpaceEmpty(namespace:HTMLInputElement){
+  	if((namespace.value===null)||(namespace.value=='')){
+  		
+  		this.isDisabeled=true;
+
+  	}else{
+  		this.isDisabeled=false;
+  	}
+
+
+  	
+
+  }
+
 
 
 	getCurrentNamespace(newNamespace:HTMLInputElement){
@@ -68,13 +84,18 @@ export class TypeComponent implements OnInit {
 		
 	}
 
+
+	
+
 	createSimpleTypeList(form:NgForm){
 
+			if(form.value['nameType'+this.i]){
 
+			console.log("si Entreo u se hizo push");
 			this.namesList.push(form.value['nameType']);
 			if(!form.value['date'+this.i]){
 
-				if(form.value['number'+this.i]){ 
+				if(!form.untouched){ 
 
 				
 					this.objSimpleTypeNumber.push({
@@ -86,9 +107,7 @@ export class TypeComponent implements OnInit {
 						'xsd:maxInclusive':{
 							'-value':form.value['max' + this.i]}
 					}
-				});
-
-				
+				});	
 			}
 			else{
 				if(form.value['min'+this.i]>0){ 
@@ -125,13 +144,11 @@ export class TypeComponent implements OnInit {
 				}
 			});
 		}
-			
-		
-		
 		this.typeList.emit(form.value['nameType' + this.i]);
-
-
 		this.i++;
+	}
+			
+
 
 		
 	}

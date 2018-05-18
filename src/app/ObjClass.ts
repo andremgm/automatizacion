@@ -171,14 +171,14 @@ export class objClass{
                 [{
                 '-name':string,
                 'wsdl:part':[{
-                    'element':string,
+                    '-element':string,
                     '-name':string
                 }]
             }];
 
     public objPart:
                 [{
-                    'element':string,
+                    '-element':string,
                     '-name':string
                 }];
 
@@ -323,7 +323,7 @@ export class objClass{
         '-xmlns:tns':string,
         '-xmlns:tnsEx':string,
         '-xmlns:xsd':string,
-        'targetNamespace':string,
+        '-targetNamespace':string,
         "wsdl:documentation": {
       "wsdl:appinfo": {
         "-source": "WMQI_APPINFO",
@@ -341,17 +341,17 @@ export class objClass{
         'wsdl:types':{
             'xsd:schema':{
                 '-targetNamespace':string,
-                'xsd:include':{'schemaLocation':string},
+                'xsd:include':{'-schemaLocation':string},
                 'xsd:import':[{
                     '-namespace':string,
                     '-schemeLocation':string
                 }],
-                
+                },
             },
             'wsdl:message':[{
                 '-name':string,
                 'wsdl:part':[{
-                    'element':string,
+                    '-element':string,
                     '-name':string
                 }]
             }],
@@ -425,7 +425,7 @@ export class objClass{
                     'soap:address':{'-location':string}
                 }
             }
-        }
+        
 
 
 
