@@ -1,6 +1,7 @@
 import { Component, OnInit,Input,OnChanges,Output,EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {objClass} from '../ObjClass';
+import * as convert from 'xml-js';
 
 @Component({
   selector: 'app-xsd',
@@ -19,41 +20,44 @@ export class XsdComponent implements OnInit,OnChanges {
   @Output() messageName:EventEmitter<string> = new EventEmitter<string>();
   
 
-  objComplexType:objClass["objComplexType"]=[{
-      "-name":'default',
+  objComplexType:objClass['objComplexType']= [{
+    "_attributes":{"name":'default'},
         "xsd:sequence":{
-          "xsd:element":[{
-            "-maxOccurs":0,
-            "-minOccurs":0,
-            "-name":'default',
-            "-type":'default',
-            "xsd:annotation":{
-              "xsd:annotation":{"xsd:documentation":'default'},
-            }
-
-          }]
+          "xsd:element":[{"_attributes":{ 
+      "maxOccurs":0,
+      "minOccurs":0,
+      "name":'default',
+      "type":'default',
+    },
+      "xsd:annotation":{
+        "xsd:annotation":{"xsd:documentation":'default'},
+      }
+    }]
 
         }
     }];
-      
 
-    objReference:objClass['objReference']=[{
-      '-name':'default',
-      '-type':'default'
-    }]
 
-   objElement :objClass["objElement"]=[{
-      "-maxOccurs":0,
-      "-minOccurs":0,
-      "-name":'default',
-      "-type":'default',
+    objReference:objClass['objReference']=
+   [{
+      "_attributes":
+      {'name':'default',
+      'type':'string'}
+    }];
+
+   objElement :objClass['objElement']=[{"_attributes":{ 
+      "maxOccurs":0,
+      "minOccurs":0,
+      "name":'default',
+      "type":'default',
+    },
       "xsd:annotation":{
         "xsd:annotation":{"xsd:documentation":'default'},
       }
     }];
 
 
-   schema:objClass["schemaXsd"] ;
+   schema:{};
 
   constructor() { }
 
@@ -76,9 +80,10 @@ export class XsdComponent implements OnInit,OnChanges {
     this.messageName.emit(this.serviceName);
 
     this.objReference.push({
-       "-name": this.serviceName+'In',
-        "-type": this.serviceName + "Type"
-    });
+      "_attributes":
+      {'name':this.serviceName+"In",
+      'type':this.serviceName+"Type"}
+    })
 
     this.i=0;
 
@@ -96,15 +101,17 @@ export class XsdComponent implements OnInit,OnChanges {
 
 
   }
+  
 
    buildComplexType(formObj:NgForm){
 
      if(!formObj.untouched){ 
-       this.objElement.push( {
-              "-maxOccurs":formObj.value['max'+this.i],
-              "-minOccurs":formObj.value['min'+this.i],
-              "-name":"Tran_"+formObj.value['paramName'+this.i],
-              "-type":"this:"+formObj.value['type'+this.i],
+       this.objElement.push({"_attributes":{ 
+              "maxOccurs":formObj.value['max'+this.i],
+              "minOccurs":formObj.value['min'+this.i],
+              "name":"Tran_"+formObj.value['paramName'+this.i],
+              "type":formObj.value['type'+this.i]
+            },
               "xsd:annotation":{
                 "xsd:annotation":{
                   "xsd:documentation":formObj.value['documentation'+this.i]
@@ -121,10 +128,12 @@ export class XsdComponent implements OnInit,OnChanges {
 
     if(this.objComplexType){ 
 
-       this.schema=   { 'schema':{ "-xmlns:xsd":"http://www.w3.org/2001/XMLSchema",
-       "-targetNamespace": "http://www.banorte.com/ws/esb/"+this.nameSpace,
-       "-xmlns:tns": "http://www.banorte.com/ws/esb/"+this.nameSpace,
-       "xsd:include":{"-schemeLocation":"--Liga Pendiente--"},
+       this.schema=   { 'schema':{ "_attributes":{"xmlns:xsd":"http://www.w3.org/2001/XMLSchema",
+       "targetNamespace": "http://www.banorte.com/ws/esb/"+this.nameSpace,
+       "xmlns:tns": "http://www.banorte.com/ws/esb/"+this.nameSpace
+     },
+       "xsd:include":{"_attributes":{"schemeLocation":"--Liga Pendiente--"}
+     },
        "xsd:complexType":this.objComplexType
      },
      "xsd:element":this.objReference
@@ -132,33 +141,37 @@ export class XsdComponent implements OnInit,OnChanges {
    };
 
 
-     this.jsonSchema = JSON.stringify(this.schema);
-      //this.jsonSchema = JSON.stringify(this.objElement);
+      var options = {compact: true, ignoreComment: true, spaces: 4};
+      var result = convert.js2xml(this.schema, options);
+      console.log(result);
+
+      this.jsonSchema = result;
     }
   }
   
   commitElements(){
         if(this.objElement){ 
 
-            this.objComplexType.push({  
-              "-name":this.serviceName+'InType',
-              "xsd:sequence":{
+          this.objComplexType.push({
+            "_attributes":{"name":this.serviceName+'InType'},
+            "xsd:sequence":{
               "xsd:element":this.objElement
-           }
-      })
-  }
-
- this.objElement= [{
-            "-maxOccurs":0,
-            "-minOccurs":0,
-            "-name":"default",
-            "-type":"default",
+            }
+          })
+        
+        
+ this.objElement= [{"_attributes":{ 
+            "maxOccurs":0,
+            "minOccurs":0,
+            "name":"string",
+            "type":"string"},
             "xsd:annotation":{
-              "xsd:annotation":{"xsd:documentation":"default"},
+              "xsd:annotation":{"xsd:documentation":"string"},
             }
 
           }];
 
 
+  }
   }
 }

@@ -1,4 +1,4 @@
-import { Component,Output } from '@angular/core';
+import { Component,Output, } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,12 +7,14 @@ import { Component,Output } from '@angular/core';
 })
 export class AppComponent {
   
-	xsdObject:{min,typeName};
+	xsdObject:string;
 	currentNameSpace='';
   currentMessage ='';
   currentServiceName='';
 
-  addNewType(currentType:{min,typeName}){
+
+
+  addNewType(currentType:string){
   	//console.log("esto es una prueba y funciono "+currentType);
 	  	if(currentType){
 

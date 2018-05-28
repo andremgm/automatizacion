@@ -1,6 +1,7 @@
 import { Component, OnInit,Input,OnChanges} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {objClass} from '../ObjClass';
+import * as convert from 'xml-js';
 
 @Component({
   selector: 'app-wsdl',
@@ -18,166 +19,189 @@ export class WsdlComponent implements OnInit {
     variable:objClass;
 
     objPortFather:objClass['objPortFather']=
-            {
-                    '-name':'default',
+            {"_attributes":{ 
+                    'name':'default'},
                     'wsdl:operation':
-                    [{
-                    '-name':'default',
-                    'wsdl:input':{
-                        '-name':'default',
-                        '-message':'default'
+                    [{"_attributes":{
+                    'name':'default'},
+                    'wsdl:input':{"_attributes":{ 
+                        'name':'default',
+                        'message':'default'
+                    }},
+                    'wsdl:output':{"_attributes":{ 
+                        'name':'default',
+                        'message':'default'}
                     },
-                    'wsdl:output':{
-                        '-name':'default',
-                        '-message':'default'
-                    },
-                    'wsdl:fault':{
-                        '-name':'default',
-                        '-message':'default'
+                    'wsdl:fault':{"_attributes":{ 
+                        'name':'default',
+                        'message':'default'
                     }
+                  }
 
                 }]
-            }
+            };
 
     objPortType:objClass['objPortType']=
-  				[{
-                    '-name':'default',
-                    'wsdl:input':{
-                        '-name':'default',
-                        '-message':'default'
+  			[{"_attributes":{
+                    'name':'default'},
+                    'wsdl:input':{"_attributes":{ 
+                        'name':'default',
+                        'message':'default'}
+                  },
+                    'wsdl:output':{"_attributes":{ 
+                        'name':'default',
+                        'message':'default'}
                     },
-                    'wsdl:output':{
-                        '-name':'default',
-                        '-message':'default'
-                    },
-                    'wsdl:fault':{
-                        '-name':'default',
-                        '-message':'default'
+                    'wsdl:fault':{"_attributes":{ 
+                        'name':'default',
+                        'message':'default'
                     }
+                  }
 
                 }];
 
 
     objPart:objClass['objPart']=
-  				      [{
-                    '-element':"default",
-                    '-name':"default"
+  				      [{"_attributes":{ 
+                    'element':'default',
+                    'name':'default'
+                  }
                 }];
 
-    objMessages:objClass["objMessages"]= 
-  			[{
-                '-name':'excepcionMsg',
-                'wsdl:part':[{
-                    '-element':"tns:Excepcion",
-                    '-name':"excepcion"
+    objMessages: objClass['objMessages']=[{"_attributes":{ 
+                'name':'excepcionMsg'},
+                'wsdl:part':[{"_attributes":{ 
+                    'element':"tns:Excepcion",
+                    'name':"excepcion"},
                 }],
             }];
 
+
          objBindingFather:objClass['objBindingFather']=
-                {
-                '-name':"default",
-                '-type':"default",
-                'soap:binding':{
-                    '-style':"default",
-                    '-transport': "default"
+              {"_attributes":{  
+                'name':'default',
+                'type':'default'},
+                'soap:binding':{"_attributes":{ 
+                    'style':'default',
+                    'transport': 'default'
+                  },
                 },
-                "wsdl:operation": [
-        {
-          "-name": "default",
-          "wsdl:input": {
-            "-name":"default",
-            "soap:body": {
-              "-parts": "default",
-              "-use": "default"
-            },
-            "soap:header": {
-              "-message": "default",
-              "-part": "default",
-              "-use": "default"
-            }
+                "wsdl:operation":  [{"_attributes":{ 
+          "name": 'default'},
+          "wsdl:input": {"_attributes":{ 
+            "name":'default'
           },
-          "wsdl:output": {
-            "-name": "default",
-            "soap:body": {
-              "-parts": "default",
-              "-use": "default"
-            },
-            "soap:header": {
-              "-message": "default",
-              "-part": "default",
-              "-use": "default"
+            "soap:body":{"_attributes":{
+              "parts":'default',
+              "use":'default'
             }
+           },
+           "soap:header":{"_attributes":{
+             "message":'default',
+             'part':'default',
+             'use':'default'
+             }
+           }
           },
-          "wsdl:fault": {
-            "-name": "default",
-            "soap:fault": {
-              "-name": "default",
-              "-use":"default"
+          "wsdl:output": {"_attributes":{ 
+            "name": 'default'
+            },
+             "soap:body":{"_attributes":{
+              "parts":'default',
+              "use":'default'
             }
+           },
+           "soap:header":{"_attributes":{
+             "message":'default',
+             'part':'default',
+             'use':'default'
+             }
+           }
+          },
+          "wsdl:fault": {"_attributes":{ 
+            "name": 'default'},
+            "soap:fault": {"_attributes": { 
+              "name": 'default',
+              "use":'default'
+            },
           }
-        }]
-          
         }
+      }]
+    }
+          
 
     objBinding:objClass['objBinding']=
-        [{
-          "-name": 'default',
-          "wsdl:input": {
-            "-name":'default',
-            "soap:body": {
-              "-parts": 'default',
-              "-use": 'default'
-            },
-            "soap:header": {
-              "-message": 'default',
-              "-part": 'default',
-              "-use": 'default'
-            }
+       [{"_attributes":{ 
+          "name": 'default'},
+          "wsdl:input": {"_attributes":{ 
+            "name":'default'
           },
-          "wsdl:output": {
-            "-name": 'default',
-            "soap:body": {
-              "-parts": 'default',
-              "-use": 'default'
-            },
-            "soap:header": {
-              "-message": 'default',
-              "-part": 'default',
-              "-use": 'default'
+            "soap:body":{"_attributes":{
+              "parts":'default',
+              "use":'default'
             }
+           },
+           "soap:header":{"_attributes":{
+             "message":'default',
+             'part':'default',
+             'use':'default'
+             }
+           }
           },
-          "wsdl:fault": {
-            "-name": 'default',
-            "soap:fault": {
-              "-name": 'default',
-              "-use":'default'
+          "wsdl:output": {"_attributes":{ 
+            "name": 'default'
+            },
+             "soap:body":{"_attributes":{
+              "parts":'default',
+              "use":'default'
             }
+           },
+           "soap:header":{"_attributes":{
+             "message":'default',
+             'part':'default',
+             'use':'default'
+             }
+           }
+          },
+          "wsdl:fault": {"_attributes":{ 
+            "name": 'default'},
+            "soap:fault": {"_attributes": { 
+              "name": 'default',
+              "use":'default'
+            },
           }
-        }];
+        }
+      }]
 
-    definitions:objClass['definitions'];
+    definitions:{};
 
-    objImport:objClass['objImport']=[
-    			{	
-                    '-namespace':'http://www.banorte.com/ws/esb/general/Headers',
-                    '-schemeLocation':"SOAP/HeaderRequest.xsd"
-                },
-                
-                ];
+    objImport:objClass['objImport']=[{	"_attributes":{ 
+                    'namespace':'http://www.banorte.com/ws/esb/general/Headers',
+                    'schemeLocation':"SOAP/HeaderRequest.xsd"
+                  },
+                }];
+        
+
     
 
   constructor() { }
 
   ngOnInit() {
-  	this.objImport.push({
-  		'-namespace':'http://www.banorte.com/ws/esb/general/Headers',
-        '-schemeLocation':"SOAP/HeaderRequest.xsd"
-  	},
-  	{
-  		'-namespace':'http://www.banorte.com/ws/esb/common/ExcepcionGeneral',
-		'-schemeLocation':"common/ExcepcionGenerica.xsd"
-  	})
-  }
+  	this.objImport.push( {"_attributes":{
+  		'namespace':'http://www.banorte.com/ws/esb/general/Headers',
+      'schemeLocation':"SOAP/HeaderRequest.xsd"
+    },
+  },
+  {"_attributes":{
+      'namespace':'http://www.banorte.com/ws/esb/general/Headers',
+      'schemeLocation':"SOAP/HeaderRequest.xsd"
+    },
+  })
+}
+
+
+  	
+  
     
  
 
@@ -185,129 +209,147 @@ export class WsdlComponent implements OnInit {
 ngOnChanges() {
   console.log('currentMessageName:'+ this.currentMessageName );
 	if(this.currentMessageName){
-    console.log('paso la validacion if en ngChages dentro de wsdl'+ this.currentMessageName );
+ 
 
 		this.messageNames.push(this.currentMessageName);
     this.buildMessage(this.currentMessageName);
 		}
+  }
 	
-	}
+	
+
 
 
 	buildMessage(currentMessageName:string){
-		this.objPart.push({
-			'-name':'request' ,
-			'-element':'tns:'+currentMessageName+'Request'
-		
 
-		},
+     
+		this.objPart.push({"_attributes":{ 
+                     'element':"tns:"+currentMessageName+"Request",
+                     'name':"tns:"+currentMessageName+"Request"
+                   }
+                 },
+                 {"_attributes":{
+                   'element':"tns:"+currentMessageName+'Reponse',
+                   'name':'reponse'
 
-		{
-			'-element':'mf:HeaderReq',
-			'-name':'requestHeader'
+                 }
+               },
+                 {"_attributes":{
+                   'element':'mf:HeaderReq',
+                   'name':'requestHeader'
 
-		});
+                 }
+		          });
+
+   
        
-		this.objMessages.push({
-			'-name':currentMessageName+'Request',
-			'wsdl:part':this.objPart
-		
-		})
+		this.objMessages.push({ "_attributes":{
+      'name':currentMessageName+"Request" },
+      'wsdl:part':this.objPart
+  })
 
     this.cleanObjPart();
 //-----------------------------------------------------------------------------------------------------------------------
-    this.objPart.push({
-      '-name':'response' ,
-      '-element':'tns:'+currentMessageName+'Response'
-    
+     this.objPart.push({"_attributes":{ 
+       'name':'response' ,
+       'element':'tns:'+currentMessageName+'Response'
+     },
+     },
 
-    },
-
-    {
-      '-element':'mf:HeaderRes',
-      '-name':'responseHeader'
-
+    {"_attributes":{ 
+      'element':'mf:HeaderRes',
+      'name':'responseHeader'
+        }
     });
        
-    this.objMessages.push({
-      '-name':currentMessageName+'Response',
+    this.objMessages.push({"_attributes":{ 
+      'name':currentMessageName+'Response'},
       'wsdl:part':this.objPart
     
     })
 
     this.cleanObjPart();
 
-//-----------------------------------------------------------------------------------------------------------------------
-		this.objPortType.push({
-			'-name':currentMessageName,
-			'wsdl:output':{
-				'-name':currentMessageName+'Res',
-				'-message':'tns:'+currentMessageName+"Response"
-			},
-			'wsdl:input':{
-				'-name':currentMessageName+'Req',
-				'-message':'tns:'+currentMessageName+"Request"
-			},
-			'wsdl:fault':{
-				'-name':'excepcion',
-				'-message':'tns:excepcionMsg'
-			}
-		});
 
 
-		this.objPortFather={
-            '-name':this.nameSpace+"SOAP",
+		this.objPortType.push({"_attributes":{
+                    'name':this.currentMessageName},
+                    'wsdl:input':{"_attributes":{ 
+                        'name':this.currentMessageName+'Res',
+                        'message':'tns:'+this.currentMessageName+'Response'
+                    }},
+                    'wsdl:output':{"_attributes":{ 
+                        'name':this.currentMessageName+'Req',
+                        'message':'tns'+this.currentMessageName+'Req'}
+                    },
+                    'wsdl:fault':{"_attributes":{ 
+                        'name':'excepcion',
+                        'message':'tns:excepcionMsg'
+                    }
+                  }
+                });
 
-			'wsdl:operation':this.objPortType
-                    
+    this.objPortFather={"_attributes":{'name':this.nameSpace+'SOAP'},
+      'wsdl:operation':this.objPortType
+    }
+
+
+
+
+		this.objBinding.push({"_attributes":{
+      "name":this.nameSpace
+    },
+    "wsdl:input":{"_attributes":{
+      "name":this.currentMessageName+"Req"
+      },
+       "soap:body":{"_attributes":{
+              "parts":'request',
+              "use":'literal'
             }
-  			
-
-
-
-		this.objBinding.push({
-          "-name": this.nameSpace,
-          "wsdl:input": {
-            "-name":currentMessageName+'Req',
-            "soap:body": {
-              "-parts": "request",
-              "-use": "literal"
-            },
-            "soap:header": {
-              "-message": "tns:"+currentMessageName+'Request',
-              "-part": "requestHeader",
-              "-use": "literal"
+           },
+           "soap:header":{"_attributes":{
+             "message":'tns'+this.currentMessageName+'Request',
+             'part':'requestHeader',
+             'use':'literal'
+             }
+           }
+    },
+    'wsdl:output':{"_attributes":{
+      'name':this.currentMessageName+'Res'
+    },
+     "soap:body":{"_attributes":{
+              "parts":'response',
+              "use":'literal'
             }
-          },
-          "wsdl:output": {
-            "-name": currentMessageName+'Res',
-            "soap:body": {
-              "-parts": "response",
-              "-use": "literal"
-            },
-            "soap:header": {
-              "-message": "tns:"+currentMessageName,
-              "-part": "responseHeader",
-              "-use": "literal"
-            }
-          },
-          "wsdl:fault": {
-            "-name": "excepcion",
-            "soap:fault": {
-              "-name": "excepcion",
-              "-use":"literal"
-            }
-          }
-        });
+           },
+           "soap:header":{"_attributes":{
+             "message":'tns'+this.currentMessageName+'Response',
+             'part':'responseHeader',
+             'use':'literal'
+             }
+           }
+  },
+"wsdl:fault":{"_attributes":{
+  "name":'excepcion'
+  },
+  "soap:fault":{"_attributes":{
+    "name":'excepcion',
+    "use":'literal'
+    }
+  },
+}
 
+  });
 
         this.objBindingFather=   
-                {
-                '-name':"default",
-                '-type':"default",
-                'soap:binding':{
-                    '-style':"default",
-                    '-transport': "default"
+                {"_attributes":{ 
+                'name':"default",
+                'type':"default"
+              },
+                'soap:binding':{'_attributes':{ 
+                    'style':"default",
+                    'transport': "default"
+                  },
                 },
                 "wsdl:operation": this.objBinding
        
@@ -327,45 +369,52 @@ ngOnChanges() {
 
 		 this.definitions=
 		   { 
-        'wsdl:definitions':{
-        '-xsmlns:wsdl':'http://schemas.xmlsoap.org/wsdl/',
-        '-name':this.nameSpace,
-        '-xmlns:mf':"http://www.banorte.com/ws/esb/general/Headers",
-        '-xmlns:soap':"http://schemas.xmlsoap.org/wsdl/soap/" ,
-        '-xmlns:tns':"http://www.banorte.com/ws/esb/"+this.nameSpace,
-        '-xmlns:tnsEx':"http://www.banorte.com/ws/esb/common/ExcepcionGeneral" ,
-        '-xmlns:xsd':"http://www.w3.org/2001/XMLSchema",
-        '-targetNamespace':"http://www.banorte.com/ws/esb/"+this.nameSpace,
+        'wsdl:definitions':{"_attributes":{ 
+        'xmlns:wsdl':'http://schemas.xmlsoap.org/wsdl/',
+        'name':this.nameSpace,
+        'xmlns:mf':"http://www.banorte.com/ws/esb/general/Headers",
+        'xmlns:soap':"http://schemas.xmlsoap.org/wsdl/soap/" ,
+        'xmlns:tns':"http://www.banorte.com/ws/esb/"+this.nameSpace,
+        'xmlns:tnsEx':"http://www.banorte.com/ws/esb/common/ExcepcionGeneral" ,
+        'xmlns:xsd':"http://www.w3.org/2001/XMLSchema",
+        'targetNamespace':"http://www.banorte.com/ws/esb/"+this.nameSpace,
+      },
         "wsdl:documentation": {
-        "wsdl:appinfo": {
-        "-source": "WMQI_APPINFO",
-        "MRWSDLAppInfo": {
-          "-imported": "true",
-          "binding": {
-            "-hasEncoding": "false",
-            "-imported": "true",
-            "-name": this.nameSpace+"SOAP",
-            "-originalBindingStyle": "document"
+        "wsdl:appinfo": {"_attributes":{ 
+        "source": "WMQI_APPINFO"},
+        "MRWSDLAppInfo": {"_attributes":{ 
+          "imported": "true"},
+          "binding": {"_attributes":{ 
+            "hasEncoding": "false",
+            "imported": "true",
+            "name": this.nameSpace+"SOAP",
+            "originalBindingStyle": "document"}
           }
         }
       }
     },
         'wsdl:types':{
-            'xsd:schema':{
-                '-targetNamespace':'http://www.banorte.com/ws/esb/'+this.nameSpace,
-                'xsd:include':{'-schemaLocation':this.nameSpace+"V1.0.xsd"},
+            'xsd:schema':{"_attributes":{ 
+                'targetNamespace':'http://www.banorte.com/ws/esb/'+this.nameSpace},
+                'xsd:include':{"_attributes":{ 
+                  'schemaLocation':this.nameSpace+"V1.0.xsd"
+                  }
+                },
                 'xsd:import':this.objImport,
               },
             },
             'wsdl:message':this.objMessages,
             'wsdl:portType':this.objPortFather,
             'wsdl:binding':this.objBindingFather,
-            'wsdl:service':{
-                '-name':this.nameSpace,
-                'wsdl:port':{
-                    '-name':this.nameSpace+"SOAP",
-                    'binding':'tns:'+this.nameSpace+'SOAP',
-                    'soap:address':{'-location':'http://www.banorte.com.ws.esb.'+this.nameSpace+'/V1.0/'}
+            'wsdl:service':{"_attributes":{
+                'name':this.nameSpace},
+                'wsdl:port':{"_attributes":{ 
+                    'name':this.nameSpace+"SOAP",
+                    'binding':'tns:'+this.nameSpace+'SOAP'
+                  },
+                    'soap:address':{"_attributes":{ 
+                      'location':'http://www.banorte.com.ws.esb.'+this.nameSpace+'/V1.0/'}
+                    }
                 }
             }
         }
@@ -374,7 +423,14 @@ ngOnChanges() {
 
         };
 
-        this.jsonSchema=JSON.stringify(this.definitions);    
+       
+    
+      var options = {compact: true, ignoreComment: true, spaces: 4};
+      var result = convert.js2xml(this.definitions, options);
+      console.log(result);
+
+      this.jsonSchema = result;
+  
 
     }
 
@@ -383,9 +439,10 @@ ngOnChanges() {
 
 
 			this.objPart=  
-				[{
-           '-element':"default",
-           '-name':"default"
+				[{"_attributes":{ 
+           'element':"default",
+           'name':"default"
+         }
         }]; 
 
 	}

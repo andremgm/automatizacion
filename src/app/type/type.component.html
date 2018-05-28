@@ -47,7 +47,7 @@ de ngForm, pero dentro de la referencia local-->
 			<div class="col-sm-1 col-md-1 col-lg-1">
 				<div class="col-sm-6">
 					Numero: <input type="checkbox" (ngModel)='type.number'	name="number{{i}}">
-					Fecha: <input type="checkbox" (ngModel)='type.date'	name="date{{i}}">
+					Fecha: <input type="checkbox" (ngModel)='type.date'	name="date{{i}}"  [checked]="isDate" >
 				</div>
 			</div>
 

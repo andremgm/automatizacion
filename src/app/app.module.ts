@@ -10,6 +10,8 @@ import { XsdComponent } from './xsd/xsd.component';
 import { TypeComponent } from './type/type.component';
 
 
+
+
 const appRoutes:Routes = [
 //each route is a JS object
   
@@ -31,9 +33,12 @@ const appRoutes:Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    
   ],
-  providers: [],
+  providers: [
+  { provide:'Objtree', useValue:window ['objtree'] }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

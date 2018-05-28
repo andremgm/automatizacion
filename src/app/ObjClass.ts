@@ -1,436 +1,244 @@
 export class objClass{
 
-    public objComplexType:[{
-        "-name":string,
-            "xsd:sequence":{
-                "xsd:element":[{
-                    "-maxOccurs":number,
-                    "-minOccurs":number,
-                    "-name":string,
-                    "-type":string,
-                    "xsd:annotation":{
-                        "xsd:annotation":{"xsd:documentation":string},
-                    }
-
-                }]
-
-            }
-    }];
+  public objSimpleType:
+  [{
+    "_attributes":{'name':string},
+    'xsd:restriction':{"_attributes":{ 
+      'base':string}
+    },
+        'xsd:minLength':{"_attributes":{
+          'value':number  },
+          },
+        'xsd:maxLenght':{"_attributes":{
+          'value':number
+      }
+    }
+  }];
 
 
-    public objReference:[{
-         "-name": string,
-        "-type": string
+ public objSimpleTypeDate:[{
+      "_attributes":{'name':string},
+      'xsd:restriction':{"_attributes":{
+        'base':string
+      }
+    }
+      
+  }];
+
+
+public    objSimpleTypeNumber:
+  [{
+    "_attributes":{'name':string},
+    'xsd:restriction':{"_attributes":{ 
+      'base':string}},
+        'xsd:minInclusive':{"_attributes":{
+          'value':number  },
+          },
+        'xsd:maxInclusive':{"_attributes":{
+          'value':number
+      }
+    }
+  }]
+
+public objComplexType:[{
+      "_attributes":{"name":string},
+        "xsd:sequence":{
+          "xsd:element":[{"_attributes":{ 
+      "maxOccurs":number,
+      "minOccurs":number,
+      "name":string,
+      "type":string,
+    },
+      "xsd:annotation":{
+        "xsd:annotation":{"xsd:documentation":string},
+      }
     }]
 
-    public objElement:[{
-        "-maxOccurs":number,
-        "-minOccurs":number,
-        "-name":string,
-        "-type":string,
-        "xsd:annotation":{
-            "xsd:annotation":{"xsd:documentation":string},
         }
     }];
 
-     public schemaXsd: {"schema":{
 
-    "-xmlns:xsd": string,
-    "-targetNamespace": string,
-    "-xmlns:tns": string,
-    "xsd:include":{"-schemeLocation":string},
-    "xsd:complexType":[{
-        "-name":string,
-            "xsd:sequence":{
-                "xsd:element":[{
-                    "-maxOccurs":number,
-                    "-minOccurs":number,
-                    "-name":string,
-                    "-type":string,
-                    "xsd:annotation":{
-                        "xsd:annotation":{"xsd:documentation":string},
-                    }
+  public objReference:[{
+      "_attributes":
+      {'name':string,
+      'type':string}
+    }];
 
-                }]
-
-            }
-    }],
-
+     public objElement :[{"_attributes":{ 
+      "maxOccurs":number,
+      "minOccurs":number,
+      "name":string,
+      "type":string,
     },
-     "xsd:element": [
-      {
-        "-name": string,
-        "-type": string
-      }]
-  }
-
-
-
-    public objSimpleType:
-        [{
-            '-name':string,
-            'xsd:restriction':{
-                    '-base':string,
-                    'xsd:minLength':{
-                        '-value':number    },
-                    'xsd:maxLenght':{
-                        '-value':number
-                    }
-            }
-        } ];
-
-           public objSimpleTypeNumber:   
-           [{
-            '-name':string,
-            'xsd:restriction':{
-                    '-base':string,
-                    'xsd:minInclusive':{
-                        '-value':number
-                    },
-                    'xsd:maxInclusive':{
-                        '-value':number
-                    }
-            }
-        } ];
-
-        public objSimpleTypeDate:   
-           [{
-            '-name':string,
-            'xsd:restriction':{
-                    '-base':string,
-            }
-        } ];
-
-    public schemaType: { "schema":{
-    "-xmlns:xsd": string,
-    "-targetNamespace": string,
-    "-xmlns:tns": string,
-    "xsd:simpleType":[{
-            '-name':string,
-            'xsd:restriction':{
-                    '-base':string,
-                    'xsd:minLength':{
-                        '-value':number
-                    },
-                    'xsd:maxLenght':{
-                        '-value':number
-                    }
-            }
-        } ],
-          "xsd:simpleTypeNumber":[{
-            '-name':string,
-            'xsd:restriction':{
-                    '-base':string,
-                    'xsd:minInclusive':{
-                        '-value':number
-                    },
-                    'xsd:maxInclusive':{
-                        '-value':number
-                    }
-            }
-        } ],
-          "xsd:simpleTypeDate":
-          [{
-            '-name':string,
-            'xsd:restriction':{
-                    '-base':string,
-            }
-        } ],
-
-    }};
-      public simpleTypeDate:
-          [{
-            '-name':string,
-            'xsd:restriction':{
-                    '-base':string,
-            }
-        } ];
-
-      public simpleTypeDateNumber:
-         [{
-            '-name':string,
-            'xsd:restriction':{
-                    '-base':string,
-                    'xsd:minInclusive':{
-                        '-value':number
-                    },
-                    'xsd:maxInclusive':{
-                        '-value':number
-                    }
-            }
-        } ];
-
-    
-    public objImport:
-               [{
-                    '-namespace':string,
-                    '-schemeLocation':string
-                }];
-
-    public objMessages:
-                [{
-                '-name':string,
-                'wsdl:part':[{
-                    '-element':string,
-                    '-name':string
-                }]
-            }];
-
-    public objPart:
-                [{
-                    '-element':string,
-                    '-name':string
-                }];
-
-    public objPortFather:
-                {
-                    '-name':string,
-                    'wsdl:operation':
-                    [{
-                    '-name':string,
-                    'wsdl:input':{
-                        '-name':string,
-                        '-message':string
-                    },
-                    'wsdl:output':{
-                        '-name':string,
-                        '-message':string
-                    },
-                    'wsdl:fault':{
-                        '-name':string,
-                        '-message':string
-                    }
-
-                }]
-            }
-    public objPortType:
-                    [{
-                    '-name':string,
-                    'wsdl:input':{
-                        '-name':string,
-                        '-message':string
-                    },
-                    'wsdl:output':{
-                        '-name':string,
-                        '-message':string
-                    },
-                    'wsdl:fault':{
-                        '-name':string,
-                        '-message':string
-                    }
-
-                }];
-
-
-    public objBindingFather:
-                {
-                '-name':string,
-                '-type':string,
-                'soap:binding':{
-                    '-style':string,
-                    '-transport': string
-                },
-                "wsdl:operation": [
-        {
-          "-name": string,
-          "wsdl:input": {
-            "-name":string,
-            "soap:body": {
-              "-parts": string,
-              "-use": string
-            },
-            "soap:header": {
-              "-message": string,
-              "-part": string,
-              "-use": string
-            }
-          },
-          "wsdl:output": {
-            "-name": string,
-            "soap:body": {
-              "-parts": string,
-              "-use": string
-            },
-            "soap:header": {
-              "-message": string,
-              "-part": string,
-              "-use": string
-            }
-          },
-          "wsdl:fault": {
-            "-name": string,
-            "soap:fault": {
-              "-name": string,
-              "-use":string
-            }
-          }
-        }]
-          
-        }
-            
-
-    public objBinding:
-     [
-        {
-          "-name": string,
-          "wsdl:input": {
-            "-name":string,
-            "soap:body": {
-              "-parts": string,
-              "-use": string
-            },
-            "soap:header": {
-              "-message": string,
-              "-part": string,
-              "-use": string
-            }
-          },
-          "wsdl:output": {
-            "-name": string,
-            "soap:body": {
-              "-parts": string,
-              "-use": string
-            },
-            "soap:header": {
-              "-message": string,
-              "-part": string,
-              "-use": string
-            }
-          },
-          "wsdl:fault": {
-            "-name": string,
-            "soap:fault": {
-              "-name": string,
-              "-use":string
-            }
-          }
-        }];
-                  
-
-           
-
-
-  
-
-
-
-    public definitions:{ 
-        'wsdl:definitions':{
-        '-xsmlns:wsdl':string,
-        '-name':string,
-        '-xmlns:mf':string,
-        '-xmlns:soap':string,
-        '-xmlns:tns':string,
-        '-xmlns:tnsEx':string,
-        '-xmlns:xsd':string,
-        '-targetNamespace':string,
-        "wsdl:documentation": {
-      "wsdl:appinfo": {
-        "-source": "WMQI_APPINFO",
-        "MRWSDLAppInfo": {
-          "-imported": "true",
-          "binding": {
-            "-hasEncoding": "false",
-            "-imported": "true",
-            "-name": string,
-            "-originalBindingStyle": "document"
-          }
-        }
+      "xsd:annotation":{
+        "xsd:annotation":{"xsd:documentation":string},
       }
-    },
-        'wsdl:types':{
-            'xsd:schema':{
-                '-targetNamespace':string,
-                'xsd:include':{'-schemaLocation':string},
-                'xsd:import':[{
-                    '-namespace':string,
-                    '-schemeLocation':string
-                }],
-                },
-            },
-            'wsdl:message':[{
-                '-name':string,
-                'wsdl:part':[{
-                    '-element':string,
-                    '-name':string
-                }]
-            }],
-            'wsdl:portType':{
-                '-name':string,
-                'wsdl:operation':[{
-                    '-name':string,
-                    'wsdl:input':{
-                        '-name':string,
-                        '-message':string
+    }];
+
+
+    public  objPortFather:
+            {"_attributes":{ 
+                    'name':string},
+                    'wsdl:operation':
+                    [{"_attributes":{
+                    'name':string},
+                    'wsdl:input':{"_attributes":{ 
+                        'name':string,
+                        'message':string
+                    }},
+                    'wsdl:output':{"_attributes":{ 
+                        'name':string,
+                        'message':string}
                     },
-                    'wsdl:output':{
-                        '-name':string,
-                        '-message':string
-                    },
-                    'wsdl:fault':{
-                        '-name':string,
-                        '-message':string
+                    'wsdl:fault':{"_attributes":{ 
+                        'name':string,
+                        'message':string
                     }
+                  }
 
                 }]
-            },
-            'wsdl:binding':{
-                '-name':string,
-                '-type':string,
-                'soap:binding':{
-                    '-style':string,
-                    '-transport': string
-                },
-                "wsdl:operation": [
-        {
-          "-name": string,
-          "wsdl:input": {
-            "-name":string,
-            "soap:body": {
-              "-parts": string,
-              "-use": string
-            },
-            "soap:header": {
-              "-message": string,
-              "-part": string,
-              "-use": string
-            }
-          },
-          "wsdl:output": {
-            "-name": string,
-            "soap:body": {
-              "-parts": string,
-              "-use": string
-            },
-            "soap:header": {
-              "-message": string,
-              "-part": string,
-              "-use": string
-            }
-          },
-          "wsdl:fault": {
-            "-name": string,
-            "soap:fault": {
-              "-name": string,
-              "-use":string
-            }
-          }
-        }],
-            },
-            'wsdl:service':{
-                '-name':string,
-                'wsdl:port':{
-                    '-name':string,
-                    'binding':string,
-                    'soap:address':{'-location':string}
+            };
+
+    public objPortType:
+        [{"_attributes":{
+                    'name':string},
+                    'wsdl:input':{"_attributes":{ 
+                        'name':string,
+                        'message':string
+                    }},
+                    'wsdl:output':{"_attributes":{ 
+                        'name':string,
+                        'message':string}
+                    },
+                    'wsdl:fault':{"_attributes":{ 
+                        'name':string,
+                        'message':string
+                    }
+                  }
+
+                }];
+
+
+      public objPart:
+                [{"_attributes":{ 
+                    'element':string,
+                    'name':string
+                  }
+                }];
+
+       public objMessages: 
+                [{"_attributes":{ 
+                    'name':string},
+                    'wsdl:part':
+                      [{"_attributes":{ 
+                        'element':string,
+                        'name':string}
+                    }],
+                }];
+
+
+       public objBindingFather:
+              {"_attributes":{  
+                'name':string,
+                'type':string}
+                'soap:binding':{"_attributes":{ 
+                    'style':string,
+                    'transport': string}
                 }
+                "wsdl:operation":   [{"_attributes":{ 
+          "name": string},
+          "wsdl:input": {"_attributes":{ 
+            "name":string
+          },
+            "soap:body":{"_attributes":{
+              "parts":string,
+              "use":string
             }
+           },
+           "soap:header":{"_attributes":{
+             "message":string,
+             'part':string,
+             'use':string
+             }
+           }
+          },
+          "wsdl:output": {"_attributes":{ 
+            "name": string
+            },
+             "soap:body":{"_attributes":{
+              "parts":string,
+              "use":string
+            }
+           },
+           "soap:header":{"_attributes":{
+             "message":string,
+             'part':string,
+             'use':string
+             }
+           }
+          },
+          "wsdl:fault": {"_attributes":{ 
+            "name": string},
+            "soap:fault": {"_attributes": { 
+              "name": string,
+              "use":string
+            },
+          }
+        }
+      }]
+    }
+          
         
 
 
-
+          public objBinding:
+       [{"_attributes":{ 
+          "name": string},
+          "wsdl:input": {"_attributes":{ 
+            "name":string
+          },
+            "soap:body":{"_attributes":{
+              "parts":string,
+              "use":string
+            }
+           }
+           "soap:header":{"_attributes":{
+             "message":string,
+             'part':string,
+             'use':string
+             }
+           }
+          },
+          "wsdl:output": {"_attributes":{ 
+            "name": string
+            },
+             "soap:body":{"_attributes":{
+              "parts":string,
+              "use":string
+            }
+           },
+           "soap:header":{"_attributes":{
+             "message":string,
+             'part':string,
+             'use':string
+             }
+           }
+          },
+          "wsdl:fault": {"_attributes":{ 
+            "name": string},
+            "soap:fault": {"_attributes": { 
+              "name": string,
+              "use":string
+            },
+          }
         }
+      }]
 
-    }
-    
-}
+             public objImport:[{  "_attributes":{ 
+                    'namespace':string
+                    'schemeLocation':string
+                  },
+                }];
+
+
+ }
